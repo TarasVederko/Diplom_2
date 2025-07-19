@@ -8,8 +8,9 @@ import pytest_check as check
 class TestCreateNewUser:
 
     @allure.title('Проверяем возможность зарегистировать нового пользователя')
-    def test_successful_create_new_user(self, new_user):
-        response,_ = new_user
+    def test_successful_create_new_user(self):
+        body = generator_user_body()
+        response = UserMethods.create_new_user(body)
         check.equal(response.status_code, 200)
         check.equal(response.json()['success'], True)
 
